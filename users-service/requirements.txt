@@ -1,5 +1,4 @@
-fastapi==0.120.0
-uvicorn[standard]
-sqlalchemy
+fastapi
+uvicorn
 asyncpg
-psycopg2-binary
+passlib

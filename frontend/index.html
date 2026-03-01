@@ -3,6 +3,10 @@
 <header>
   <h1>PREMIUM GADGETS</h1>
 
+  <div class="nav-actions">
+    <button id="admin-btn" class="hidden">Admin Panel</button>
+  </div>
+
   <div class="cart-wrapper">
     <div class="cart-button" id="open-cart">
       Bag (<span id="cart-count">0</span>)
@@ -19,15 +23,14 @@
   </div>
 </header>
 
-<!-- AUTH BUTTON -->
 <div class="auth-section">
   <button id="auth-btn">Login</button>
 </div>
 
-<!-- AUTH MODAL -->
 <div class="auth-modal" id="auth-modal">
   <div class="auth-box">
-    <h2 id="auth-title">Login</h2>
+    <p id="auth-error" class="auth-error"></p>
+    <h2 id="auth-title">Hey please Login</h2>
 
     <input type="email" id="email" placeholder="Email" />
     <input type="password" id="password" placeholder="Password" />
@@ -39,6 +42,9 @@
 
 <main>
   <div id="products" class="products-grid"></div>
+
+
+  <div id="toast" class="toast hidden"></div>
 </main>
 
 <script type="module" src="/src/main.js"></script>

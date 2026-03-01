@@ -1,5 +1,12 @@
 import "./styles.css";
 
+const USERS_API = "http://localhost:8000";
+const ORDERS_API = "http://localhost:8083";
+
+// =====================
+// PRODUCTS
+// =====================
+
 const products = [
   { id: 1, name: "iPhone 15 Pro", price: 1200, image: "https://picsum.photos/400/300?1" },
   { id: 2, name: "Samsung Galaxy S24", price: 1100, image: "https://picsum.photos/400/300?2" },
@@ -13,6 +20,12 @@ const products = [
 ];
 
 let cart = [];
+let isLoginMode = true;
+let currentUser = JSON.parse(localStorage.getItem("user"));
+
+// =====================
+// DOM ELEMENTS
+// =====================
 
 const productsContainer = document.getElementById("products");
 const cartPopup = document.getElementById("cart-popup");
@@ -21,7 +34,21 @@ const cartItemsContainer = document.getElementById("cart-items");
 const cartCount = document.getElementById("cart-count");
 const cartTotal = document.getElementById("cart-total");
 
+const authBtn = document.getElementById("auth-btn");
+const authModal = document.getElementById("auth-modal");
+const submitAuth = document.getElementById("submit-auth");
+const toggleAuth = document.getElementById("toggle-auth");
+const authTitle = document.getElementById("auth-title");
+const checkoutBtn = document.querySelector(".checkout-btn");
+const authError = document.getElementById("auth-error");
+
+// =====================
+// PRODUCT RENDER
+// =====================
+
 function renderProducts() {
+  productsContainer.innerHTML = "";
+
   products.forEach(product => {
     const div = document.createElement("div");
     div.className = "product";
@@ -40,6 +67,10 @@ function renderProducts() {
     productsContainer.appendChild(div);
   });
 }
+
+// =====================
+// CART SYSTEM
+// =====================
 
 function addToCart(product) {
   cart.push(product);
@@ -74,23 +105,16 @@ function updateCart() {
   });
 
   cartCount.textContent = cart.length;
-  cartTotal.textContent = total;
+  cartTotal.textContent = total.toFixed(2);
 }
 
 openCartBtn.addEventListener("click", () => {
   cartPopup.classList.toggle("open");
 });
 
-// AUTH SYSTEM
-const authBtn = document.getElementById("auth-btn");
-const authModal = document.getElementById("auth-modal");
-const submitAuth = document.getElementById("submit-auth");
-const toggleAuth = document.getElementById("toggle-auth");
-const authTitle = document.getElementById("auth-title");
-const checkoutBtn = document.querySelector(".checkout-btn");
-
-let isLoginMode = true;
-let currentUser = JSON.parse(localStorage.getItem("user"));
+// =====================
+// AUTH UI UPDATE
+// =====================
 
 function updateAuthUI() {
   if (currentUser) {
@@ -103,6 +127,10 @@ function updateAuthUI() {
     checkoutBtn.style.opacity = "0.5";
   }
 }
+
+// =====================
+// LOGIN / LOGOUT
+// =====================
 
 authBtn.addEventListener("click", () => {
   if (currentUser) {
@@ -120,22 +148,63 @@ toggleAuth.addEventListener("click", () => {
   toggleAuth.textContent = isLoginMode
     ? "Don't have an account? Sign up"
     : "Already have an account? Login";
+
+  if (authError) authError.textContent = "";
 });
 
-submitAuth.addEventListener("click", () => {
+// =====================
+// REGISTER / LOGIN API
+// =====================
+
+submitAuth.addEventListener("click", async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
+  if (authError) authError.textContent = "";
+
   if (!email || !password) {
-    alert("Fill all fields");
+    if (authError) authError.textContent = "Please fill all fields.";
     return;
   }
 
-  localStorage.setItem("user", JSON.stringify({ email }));
-  currentUser = { email };
+  try {
+    const endpoint = isLoginMode ? "/login" : "/register";
 
-  authModal.classList.remove("active");
-  updateAuthUI();
+    const response = await fetch(USERS_API + endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password,
+        name: "User"
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (authError) authError.textContent = data.detail || "Authentication failed.";
+      return;
+    }
+
+    if (isLoginMode) {
+      currentUser = data.user;
+      localStorage.setItem("user", JSON.stringify(currentUser));
+      authModal.classList.remove("active");
+      updateAuthUI();
+    } else {
+      if (authError) {
+        authError.style.color = "green";
+        authError.textContent = "Registration successful! Please login.";
+      }
+      isLoginMode = true;
+      authTitle.textContent = "Login";
+      toggleAuth.textContent = "Don't have an account? Sign up";
+    }
+
+  } catch (error) {
+    if (authError) authError.textContent = "Server error.";
+  }
 });
 
 authModal.addEventListener("click", (e) => {
@@ -144,6 +213,55 @@ authModal.addEventListener("click", (e) => {
   }
 });
 
-updateAuthUI();
+// =====================
+// CHECKOUT → CREATE ORDER
+// =====================
 
-renderProducts();
+checkoutBtn.addEventListener("click", async () => {
+  if (!currentUser) {
+    alert("Please login first.");
+    return;
+  }
+
+  if (cart.length === 0) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+  const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+
+  try {
+    const response = await fetch(`${ORDERS_API}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userId: currentUser.id,
+        totalAmount: totalAmount
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Order failed");
+    }
+
+    await response.json();
+
+    alert("Order placed successfully!");
+
+    cart = [];
+    updateCart();
+    cartPopup.classList.remove("open");
+
+  } catch (error) {
+    alert("Error placing order.");
+  }
+});
+
+// =====================
+// INIT
+// =====================
+
+ updateAuthUI();
+ renderProducts();

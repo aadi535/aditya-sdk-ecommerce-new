@@ -40,7 +40,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	
+   <dependency>
+     <groupId>io.github.dftrakesh</groupId>
+     <artifactId>mayers-sdk</artifactId>
+     <version>1.0.2</version>
+   </dependency>
+ </dependencies>
 
 	<build>
 		<plugins>

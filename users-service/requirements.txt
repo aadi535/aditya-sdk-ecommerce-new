@@ -1,0 +1,5 @@
+fastapi==0.120.0
+uvicorn[standard]
+sqlalchemy
+asyncpg
+psycopg2-binary

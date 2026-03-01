@@ -1,0 +1,23 @@
+{
+    "name": "database-migrations",
+    "version": "1.0.0",
+    "description": "Prisma migration runner",
+    "main": "index.js",
+    "scripts": {
+        "migrate": "npx prisma migrate deploy",
+        "seed": "npx prisma db seed",
+        "generate": "npx prisma generate"
+    },
+    "prisma": {
+        "seed": "ts-node prisma/seed.ts"
+    },
+    "dependencies": {
+        "@prisma/client": "5.10.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "prisma": "5.10.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.0"
+    }
+}

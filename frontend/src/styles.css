@@ -49,6 +49,7 @@ header {
 .cart-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;  /* <-- fixes vertical alignment */
   margin-bottom: 10px;
   font-size: 14px;
 }
@@ -56,9 +57,14 @@ header {
 .remove-btn {
   background: none;
   border: none;
-  color: #999;
+  color: #888;
   cursor: pointer;
   font-size: 12px;
+  padding: 0;
+}
+
+.remove-btn:hover {
+  color: #000;
 }
 
 .cart-footer {
@@ -206,4 +212,35 @@ button {
 
 .hidden {
   display: none;
+}
+.profile-section {
+  position: absolute;
+  left: 30px;
+  top: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
 }

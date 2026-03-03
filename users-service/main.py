@@ -135,3 +135,8 @@ async def login_user(user: LoginRequest):
 
     finally:
         await conn.close()
+
+
+# =========================
+# Update Name Endpoint (NEW)
+# =========================

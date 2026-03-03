@@ -1,51 +1,61 @@
 <body>
+  <header>
+    <h1>PREMIUM GADGETS</h1>
 
-<header>
-  <h1>PREMIUM GADGETS</h1>
-
-  <div class="nav-actions">
-    <button id="admin-btn" class="hidden">Admin Panel</button>
-  </div>
-
-  <div class="cart-wrapper">
-    <div class="cart-button" id="open-cart">
-      Bag (<span id="cart-count">0</span>)
+    <div class="nav-actions">
+      <button id="admin-btn" class="hidden">Admin Panel</button>
     </div>
 
-    <div class="cart-popup" id="cart-popup">
-      <div id="cart-items"></div>
+    <div class="cart-wrapper">
+      <div class="cart-button" id="open-cart">
+        Bag (<span id="cart-count">0</span>)
+      </div>
 
-      <div class="cart-footer">
-        <div>Total: Euro <span id="cart-total">0</span></div>
-        <button class="checkout-btn">Place Order</button>
+      <div id="profile-section" class="profile-section">
+        <span id="profile-name"></span>
+      </div> 
+
+      <div class="cart-popup" id="cart-popup">
+        <div id="cart-items"></div>
+
+        <div class="cart-footer">
+          <div>Total: Euro <span id="cart-total">0</span></div>
+          <button class="checkout-btn">Place Order</button>
+        </div>
       </div>
     </div>
+  </header>
+
+  <div class="auth-section">
+    <button id="auth-btn">Login</button>
   </div>
-</header>
 
-<div class="auth-section">
-  <button id="auth-btn">Login</button>
-</div>
+  <div class="auth-modal" id="auth-modal">
+    <div class="auth-box">
+      <p id="auth-error" class="auth-error"></p>
+      <h2 id="auth-title">Login</h2>
 
-<div class="auth-modal" id="auth-modal">
-  <div class="auth-box">
-    <p id="auth-error" class="auth-error"></p>
-    <h2 id="auth-title">Hey please Login</h2>
+      <div id="name-modal" class="modal">
+        <div class="modal-content">
+          <h2>Complete Your Profile</h2>
+          <input type="text" id="name-input" placeholder="Enter your name" />
+          <button id="save-name-btn">Save</button>
+        </div>
+      </div>
 
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
 
-    <button id="submit-auth">Submit</button>
-    <p id="toggle-auth">Don't have an account? Sign up</p>
+      <button id="submit-auth">Submit</button>
+      <p id="toggle-auth">Don't have an account? Sign up</p>
+    </div>
   </div>
-</div>
 
-<main>
-  <div id="products" class="products-grid"></div>
+  <main>
+    <div id="products" class="products-grid"></div>
 
+    <div id="toast" class="toast hidden"></div>
+  </main>
 
-  <div id="toast" class="toast hidden"></div>
-</main>
-
-<script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/main.js"></script>
 </body>

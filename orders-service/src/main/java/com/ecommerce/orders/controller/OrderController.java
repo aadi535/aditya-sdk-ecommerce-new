@@ -1,5 +1,8 @@
 package com.ecommerce.orders.controller;
-
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Map;
 import com.ecommerce.orders.model.Order;
 import com.ecommerce.orders.model.OrderStatus;
 import com.ecommerce.orders.repository.OrderRepository;
@@ -31,6 +34,22 @@ public class OrderController {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
+
+    @PutMapping("/orders/{id}/status")
+public Order updateOrderStatus(@PathVariable Integer id, @RequestBody Map<String, Integer> body) {
+
+    Order order = orderRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Order not found"));
+
+    Integer statusId = body.get("statusId");
+
+    OrderStatus status = new OrderStatus();
+    status.setId(statusId);
+
+    order.setStatus(status);
+
+    return orderRepository.save(order);
+}
 
     // ===============================
     // CREATE ORDER

@@ -1,19 +1,25 @@
 <body>
-  <header>
-    <h1>PREMIUM GADGETS</h1>
+  <!-- HEADER -->
+<header class="topbar">
 
-    <div class="nav-actions">
-      <button id="admin-btn" class="hidden">Admin Panel</button>
-    </div>
+  <div class="nav-left">
+   <a href="http://localhost:5173/">
+  <button id="home-btn">Home</button>
+</a>
+    <button id="admin-btn" class="hidden">Admin Panel</button>
+    <button id="auth-btn">Login</button>
+  </div>
+
+  <h1 class="brand">APEX PREMIUM GADGETS</h1>
+
+  <div class="nav-right">
+
+    <button id="orders-btn" class="hidden">My Orders</button>
 
     <div class="cart-wrapper">
       <div class="cart-button" id="open-cart">
         Bag (<span id="cart-count">0</span>)
       </div>
-
-      <div id="profile-section" class="profile-section">
-        <span id="profile-name"></span>
-      </div> 
 
       <div class="cart-popup" id="cart-popup">
         <div id="cart-items"></div>
@@ -24,38 +30,38 @@
         </div>
       </div>
     </div>
-  </header>
 
-  <div class="auth-section">
-    <button id="auth-btn">Login</button>
-  </div>
+   </div>
 
+</header>
+
+ 
+  <!-- LOGIN / REGISTER MODAL -->
   <div class="auth-modal" id="auth-modal">
     <div class="auth-box">
       <p id="auth-error" class="auth-error"></p>
-      <h2 id="auth-title">Login</h2>
 
-      <div id="name-modal" class="modal">
-        <div class="modal-content">
-          <h2>Complete Your Profile</h2>
-          <input type="text" id="name-input" placeholder="Enter your name" />
-          <button id="save-name-btn">Save</button>
-        </div>
-      </div>
+       <h2 id="auth-title">Login</h2>
 
-      <input type="email" id="email" placeholder="Email" />
+       <input type="email" id="email" placeholder="Email" />
+
       <input type="password" id="password" placeholder="Password" />
 
       <button id="submit-auth">Submit</button>
+
       <p id="toggle-auth">Don't have an account? Sign up</p>
     </div>
   </div>
 
+  <!-- MAIN CONTENT -->
   <main>
-    <div id="products" class="products-grid"></div>
-
-    <div id="toast" class="toast hidden"></div>
+    <!-- PRODUCTS / ORDERS / ADMIN CONTENT -->
+     <div id="products" class="products-grid"></div>
   </main>
 
+  <!-- TOAST POPUP -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- JS -->
   <script type="module" src="/src/main.js"></script>
 </body>

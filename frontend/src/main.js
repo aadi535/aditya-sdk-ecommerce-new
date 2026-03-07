@@ -48,14 +48,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const checkoutBtn = document.querySelector(".checkout-btn");
   const authError = document.getElementById("auth-error");
 
+  const adminBtn = document.getElementById("admin-btn");
+  const ordersBtn = document.getElementById("orders-btn");
+
   // =====================
   // RENDER PRODUCTS
   // =====================
 
   function renderProducts() {
+
     productsContainer.innerHTML = "";
 
     products.forEach(product => {
+
       const div = document.createElement("div");
       div.className = "product";
 
@@ -71,7 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       productsContainer.appendChild(div);
+
     });
+
   }
 
   // =====================
@@ -89,10 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateCart() {
+
     cartItemsContainer.innerHTML = "";
     let total = 0;
 
     cart.forEach((item, index) => {
+
       total += item.price;
 
       const div = document.createElement("div");
@@ -108,10 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       cartItemsContainer.appendChild(div);
+
     });
 
     cartCount.textContent = cart.length;
     cartTotal.textContent = total.toFixed(2);
+
   }
 
   openCartBtn.addEventListener("click", () => {
@@ -123,15 +134,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // =====================
 
   function updateAuthUI() {
+
     if (currentUser) {
+
       authBtn.textContent = "Logout";
       checkoutBtn.disabled = false;
       checkoutBtn.style.opacity = "1";
+
+      ordersBtn.classList.remove("hidden");
+
+      if (currentUser.role === "admin") {
+        adminBtn.classList.remove("hidden");
+      }
+
     } else {
+
       authBtn.textContent = "Login";
       checkoutBtn.disabled = true;
       checkoutBtn.style.opacity = "0.5";
+
+      adminBtn.classList.add("hidden");
+      ordersBtn.classList.add("hidden");
+
     }
+
   }
 
   // =====================
@@ -139,22 +165,31 @@ document.addEventListener("DOMContentLoaded", () => {
   // =====================
 
   authBtn.addEventListener("click", () => {
+
     if (currentUser) {
+
       localStorage.removeItem("user");
       currentUser = null;
       updateAuthUI();
+
     } else {
+
       authModal.classList.add("active");
+
     }
+
   });
 
   toggleAuth.addEventListener("click", () => {
+
     isLoginMode = !isLoginMode;
     authTitle.textContent = isLoginMode ? "Login" : "Sign Up";
     authError.textContent = "";
+
   });
 
   submitAuth.addEventListener("click", async () => {
+
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -165,13 +200,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-     const endpoint = isLoginMode ? "/login" : "/register";
+    const endpoint = isLoginMode ? "/login" : "/register";
 
     try {
+
       const response = await fetch(USERS_API + endpoint, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, name: "User" })
+
       });
 
       const data = await response.json();
@@ -182,28 +220,30 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (isLoginMode) {
+
         currentUser = data.user;
         localStorage.setItem("user", JSON.stringify(currentUser));
         authModal.classList.remove("active");
         updateAuthUI();
-     } else {
-  authError.style.color = "green";
-  authError.textContent = "Registration successful! Please login.";
 
-  // Switch to login mode automatically
-  isLoginMode = true;
-  authTitle.textContent = "Login";
-  toggleAuth.textContent = "Don't have an account? Sign up";
+      } else {
 
-  // Clear password field
-  document.getElementById("password").value = "";
-}
+        authError.style.color = "green";
+        authError.textContent = "Registration successful! Please login.";
+
+        isLoginMode = true;
+        authTitle.textContent = "Login";
+
+        document.getElementById("password").value = "";
+
+      }
+
     } catch {
       authError.textContent = "Server error.";
     }
+
   });
 
-  // Close modal on outside click
   authModal.addEventListener("click", (e) => {
     if (e.target === authModal) {
       authModal.classList.remove("active");
@@ -211,48 +251,171 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =====================
-  // CHECKOUT (REQUIRES LOGIN)
+  // CHECKOUT
   // =====================
 
   checkoutBtn.addEventListener("click", async () => {
 
     if (!currentUser) {
-      alert("Please login to place order.");
+      showToast("Please login first");
       return;
     }
 
     if (cart.length === 0) {
-      alert("Your cart is empty.");
+      showToast("Cart is empty");
       return;
     }
 
     const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
 
     try {
+
       const response = await fetch(`${ORDERS_API}/orders`, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId: currentUser.id,
           totalAmount: totalAmount
         })
+
       });
 
       if (!response.ok) {
-        alert("Order failed.");
+        showToast("Order failed");
         return;
       }
 
-      alert("Order placed successfully!");
+      showToast("✅ Order placed successfully!");
 
       cart = [];
       updateCart();
       cartPopup.classList.remove("open");
 
     } catch {
-      alert("Server error while placing order.");
+      showToast("Server error");
     }
+
   });
+
+  // =====================
+  // USER ORDER HISTORY
+  // =====================
+
+  async function loadUserOrders() {
+
+    productsContainer.innerHTML = "<h2>My Orders</h2>";
+
+    const response = await fetch(`${ORDERS_API}/orders`);
+    const orders = await response.json();
+
+    const userOrders = orders.filter(o => o.userId === currentUser.id);
+
+    userOrders.forEach(order => {
+
+      const div = document.createElement("div");
+      div.className = "order-card";
+
+      div.innerHTML = `
+        <div class="order-header">
+          <span>Order #${order.id}</span>
+          <span>User ${order.userId}</span>
+        </div>
+
+        <div class="order-body">
+          <span>Total: €${order.totalAmount}</span>
+          <span>Status: ${order.status.name}</span>
+        </div>
+      `;
+
+      productsContainer.appendChild(div);
+
+    });
+
+  }
+
+  ordersBtn.addEventListener("click", () => {
+    loadUserOrders();
+  });
+
+  // =====================
+  // ADMIN PANEL
+  // =====================
+
+  adminBtn.addEventListener("click", () => {
+    loadAdminOrders();
+  });
+
+  async function loadAdminOrders() {
+
+  productsContainer.innerHTML = "<h2>Admin Panel - Orders</h2>";
+
+  const response = await fetch(`${ORDERS_API}/orders`);
+  const orders = await response.json();
+
+  orders.forEach(order => {
+
+    const div = document.createElement("div");
+    div.className = "order-card";
+
+    div.innerHTML = `
+      <div class="order-header">
+        <span>Order #${order.id}</span>
+        <span>User ${order.userId}</span>
+      </div>
+
+      <div class="order-body">
+        <span>Total: €${order.totalAmount}</span>
+
+        <select data-order="${order.id}">
+          <option value="1" ${order.status.id==1?'selected':''}>Pending</option>
+          <option value="2" ${order.status.id==2?'selected':''}>Confirmed</option>
+          <option value="5" ${order.status.id==5?'selected':''}>Delivered</option>
+          <option value="6" ${order.status.id==6?'selected':''}>Canceled</option>
+        </select>
+      </div>
+    `;
+
+    const select = div.querySelector("select");
+
+    select.addEventListener("change", async () => {
+
+      await fetch(`${ORDERS_API}/orders/${order.id}/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          statusId: parseInt(select.value)
+        })
+      });
+
+      showToast("Order status updated");
+
+    });
+
+    productsContainer.appendChild(div);
+
+  });
+
+}
+
+  // =====================
+  // TOAST
+  // =====================
+
+  function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.remove("hidden");
+
+    setTimeout(() => {
+      toast.classList.add("hidden");
+    }, 6000);
+
+  }
 
   // =====================
   // INIT

@@ -97,9 +97,9 @@ body {
   right: 0;
   top: 50px;
   width: 300px;
-  background: white;
+  background: rgb(242, 243, 240);
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.575);
   padding: 20px;
   display: none;
 }
@@ -125,7 +125,7 @@ body {
 }
 
 .remove-btn:hover {
-  color: black;
+  color: rgb(202, 66, 66);
 }
 
 .cart-footer {
@@ -139,7 +139,7 @@ body {
   margin-top: 10px;
   width: 100%;
   padding: 8px;
-  background: black;
+  background: rgb(1, 1, 1);
   color: white;
   border-radius: 8px;
   border: none;
@@ -164,6 +164,7 @@ main {
   background: white;
   padding: 25px;
   border-radius: 16px;
+  text-align: center;
   transition: all .35s ease;
   cursor: pointer;
 }
@@ -248,15 +249,15 @@ main {
 
 .auth-box p {
   font-size: 12px;
-  color: #555;
+  color: #1a1818;
   cursor: pointer;
   text-align: center;
 }
 
 .auth-error {
-  color: #d32f2f;
-   font-size: 13px;
-  min-height: 18px;
+   color: #d42626;
+   font-size: 15px;
+   min-height: 18px;
  }
 
 /* =========================

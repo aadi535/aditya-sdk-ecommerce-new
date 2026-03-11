@@ -18,15 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // =====================
 
   const products = [
-    { id: 1, name: "iPhone 15 Pro", price: 1200, image: "https://picsum.photos/400/300?1" },
-    { id: 2, name: "Samsung Galaxy S24", price: 1100, image: "https://picsum.photos/400/300?2" },
-    { id: 3, name: "MacBook Air M3", price: 1500, image: "https://picsum.photos/400/300?3" },
-    { id: 4, name: "Sony WH-1000XM5", price: 400, image: "https://picsum.photos/400/300?4" },
-    { id: 5, name: "Apple Watch Ultra", price: 900, image: "https://picsum.photos/400/300?5" },
-    { id: 6, name: "iPad Pro", price: 1000, image: "https://picsum.photos/400/300?6" },
-    { id: 7, name: "DJI Mini Drone", price: 800, image: "https://picsum.photos/400/300?7" },
-    { id: 8, name: "PlayStation 5", price: 600, image: "https://picsum.photos/400/300?8" },
-    { id: 9, name: "Dell XPS 15", price: 1800, image: "https://picsum.photos/400/300?9" }
+    { id: 1, name: "iPhone 17 Pro", price: 1200, image: "/images/iphone.jpg" },
+    { id: 2, name: "Samsung Galaxy S26 Ultra", price: 1100, image: "/images/samsung.jpg" },
+    { id: 3, name: "MacBook Air M5 Pro", price: 1500, image: "/images/macbook.jpg" },
+    { id: 4, name: "Sony WH-1000XM5", price: 400, image: "/images/sony.jpg" },
+    { id: 5, name: "Apple Watch Ultra", price: 900, image: "/images/watch.jpg" },
+    { id: 6, name: "iPad Pro", price: 1000, image: "/images/ipad.jpg" },
+    { id: 7, name: "DJI Mini 5Pro", price: 800, image: "/images/drone.jpg" },
+    { id: 8, name: "PlayStation 7", price: 600, image: "/images/ps5.jpg" },
+    { id: 9, name: "ASUS Tuf Gaming", price: 1800, image: "/images/asus.jpg" }
   ];
 
   // =====================
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       div.innerHTML = `
         <img src="${product.image}" />
-        <h3>${product.name}</h3>
-        <p>€${product.price}</p>
+        <h3 class="centre" >${product.name}</h3>
+        <p class="centre" >€${product.price}</p>
         <button>Add to Cart</button>
       `;
 

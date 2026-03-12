@@ -1,67 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>APEX Premium Gadgets</title>
+
+<link rel="stylesheet" href="/src/styles.css">
+
+</head>
+
 <body>
-  <!-- HEADER -->
+
+
+<!-- ================= HEADER ================= -->
+
 <header class="topbar">
 
   <div class="nav-left">
-   <a href="http://localhost:5173/">
-  <button id="home-btn">Home</button>
-</a>
+     <a href="http://localhost:5173/">
+    <button id="home-btn">Home</button>
+    </a>
     <button id="admin-btn" class="hidden">Admin Panel</button>
+
     <button id="auth-btn">Login</button>
+
   </div>
 
+
   <h1 class="brand">APEX PREMIUM GADGETS</h1>
+
 
   <div class="nav-right">
 
     <button id="orders-btn" class="hidden">My Orders</button>
 
+
     <div class="cart-wrapper">
+
       <div class="cart-button" id="open-cart">
         Bag (<span id="cart-count">0</span>)
       </div>
 
+
       <div class="cart-popup" id="cart-popup">
+
         <div id="cart-items"></div>
 
         <div class="cart-footer">
+
           <div>Total: Euro <span id="cart-total">0</span></div>
+
           <button class="checkout-btn">Place Order</button>
+
         </div>
+
       </div>
+
     </div>
 
-   </div>
+  </div>
 
 </header>
 
- 
-  <!-- LOGIN / REGISTER MODAL -->
-  <div class="auth-modal" id="auth-modal">
-    <div class="auth-box">
-      <p id="auth-error" class="auth-error"></p>
 
-       <h2 id="auth-title">Login</h2>
 
-       <input type="email" id="email" placeholder="Email" />
+<!-- ================= LOGIN / REGISTER ================= -->
 
-      <input type="password" id="password" placeholder="Password" />
+<div class="auth-modal" id="auth-modal">
 
-      <button id="submit-auth">Submit</button>
+  <div class="auth-box">
 
-      <p id="toggle-auth">Don't have an account? Sign up</p>
-    </div>
+    <p id="auth-error" class="auth-error"></p>
+
+    <h2 id="auth-title">Login</h2>
+
+    <input type="email" id="email" placeholder="Email">
+
+    <input type="password" id="password" placeholder="Password">
+
+    <button id="submit-auth">Submit</button>
+
+    <p id="toggle-auth">Don't have an account? Sign up</p>
+
   </div>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <!-- PRODUCTS / ORDERS / ADMIN CONTENT -->
-     <div id="products" class="products-grid"></div>
-  </main>
+</div>
 
-  <!-- TOAST POPUP -->
-  <div id="toast" class="toast hidden"></div>
 
-  <!-- JS -->
-  <script type="module" src="/src/main.js"></script>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main>
+
+  <div id="products" class="products-grid"></div>
+
+</main>
+
+
+
+<!-- ================= PRODUCT DETAILS MODAL ================= -->
+
+<div id="product-modal" class="product-modal hidden">
+
+  <div class="product-modal-content">
+
+    <span id="close-product" class="close-product">✕</span>
+
+    <img id="product-modal-img" alt="Product Image">
+
+    <h2 id="product-modal-title"></h2>
+
+    <p id="product-modal-desc"></p>
+
+    <p class="product-modal-price">
+      €<span id="product-modal-price"></span>
+    </p>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= TOAST MESSAGE ================= -->
+
+<div id="toast" class="toast hidden"></div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script type="module" src="/src/main.js"></script>
+
+
 </body>
+</html>

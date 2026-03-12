@@ -313,8 +313,76 @@ main {
 
 /* =========================
    HIDDEN CLASS
-========================= */
+=========================End */
 
 .hidden{
   display:none;
+}
+
+.product-modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:2000;
+}
+
+/* modal visible */
+.product-modal.active{
+display:flex;
+}
+
+/* popup card */
+.product-modal-content{
+background:white;
+padding:30px;
+border-radius:12px;
+width:400px;
+text-align:center;
+position:relative;
+}
+
+/* animation only when modal opens */
+.product-modal.active .product-modal-content{
+animation:popup .35s ease;
+}
+
+.product-modal-content img{
+width:100%;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+@keyframes popup{
+from{
+transform:scale(.9);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.product-modal-price{
+font-size:18px;
+font-weight:600;
+margin-top:10px;
+}
+
+.close-product{
+position:absolute;
+top:10px;
+right:15px;
+cursor:pointer;
+font-size:20px;
+}
+
+.product img{
+cursor:pointer;
 }

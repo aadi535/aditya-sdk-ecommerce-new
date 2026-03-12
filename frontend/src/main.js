@@ -5,17 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const USERS_API = "http://localhost:8000";
   const ORDERS_API = "http://localhost:8083";
 
-  // =====================
-  // STATE
-  // =====================
-
   let cart = [];
   let isLoginMode = true;
   let currentUser = JSON.parse(localStorage.getItem("user"));
-
-  // =====================
-  // PRODUCTS
-  // =====================
 
 const products = [
   { 
@@ -83,10 +75,6 @@ const products = [
   }
 ];
 
-  // =====================
-  // DOM ELEMENTS
-  // =====================
-
   const productsContainer = document.getElementById("products");
   const cartPopup = document.getElementById("cart-popup");
   const openCartBtn = document.getElementById("open-cart");
@@ -105,13 +93,8 @@ const products = [
   const adminBtn = document.getElementById("admin-btn");
   const ordersBtn = document.getElementById("orders-btn");
 
-  // Product modal elements
   const productModal = document.getElementById("product-modal");
   const closeProduct = document.getElementById("close-product");
-
-  // =====================
-  // RENDER PRODUCTS
-  // =====================
 
   function renderProducts() {
 
@@ -129,12 +112,10 @@ const products = [
         <button>Add to Cart</button>
       `;
 
-      // Add to cart
       div.querySelector("button").addEventListener("click", () => {
         addToCart(product);
       });
 
-      // OPEN PRODUCT DETAILS
       div.querySelector("img").addEventListener("click", () => {
         openProductModal(product);
       });
@@ -144,10 +125,6 @@ const products = [
     });
 
   }
-
-  // =====================
-  // PRODUCT MODAL
-  // =====================
 
   function openProductModal(product){
 
@@ -163,10 +140,6 @@ const products = [
   closeProduct.addEventListener("click", () => {
     productModal.classList.remove("active");
   });
-
-  // =====================
-  // CART SYSTEM
-  // =====================
 
   function addToCart(product) {
     cart.push(product);
@@ -212,10 +185,6 @@ const products = [
     cartPopup.classList.toggle("open");
   });
 
-  // =====================
-  // AUTH UI UPDATE
-  // =====================
-
   function updateAuthUI() {
 
     if (currentUser) {
@@ -242,10 +211,6 @@ const products = [
     }
 
   }
-
-  // =====================
-  // LOGIN / LOGOUT
-  // =====================
 
   authBtn.addEventListener("click", () => {
 
@@ -333,10 +298,6 @@ const products = [
     }
   });
 
-  // =====================
-  // CHECKOUT
-  // =====================
-
   checkoutBtn.addEventListener("click", async () => {
 
     if (!currentUser) {
@@ -381,10 +342,6 @@ const products = [
 
   });
 
-  // =====================
-  // USER ORDER HISTORY
-  // =====================
-
   async function loadUserOrders() {
 
     productsContainer.innerHTML = "<h2>My Orders</h2>";
@@ -420,10 +377,6 @@ const products = [
   ordersBtn.addEventListener("click", () => {
     loadUserOrders();
   });
-
-  // =====================
-  // ADMIN PANEL
-  // =====================
 
   adminBtn.addEventListener("click", () => {
     loadAdminOrders();
@@ -481,10 +434,6 @@ const products = [
 
   }
 
-  // =====================
-  // TOAST
-  // =====================
-
   function showToast(message) {
 
     const toast = document.getElementById("toast");
@@ -497,10 +446,6 @@ const products = [
     }, 6000);
 
   }
-
-  // =====================
-  // INIT
-  // =====================
 
   updateAuthUI();
   renderProducts();

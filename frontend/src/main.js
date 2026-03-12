@@ -457,7 +457,6 @@ const products = [
 
   }
  
-
  
   function showToast(message) {
 

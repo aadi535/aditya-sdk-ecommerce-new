@@ -27,9 +27,7 @@ public class OrderController {
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
-    // ===============================
-    // GET ALL ORDERS
-    // ===============================
+ 
     @GetMapping("/orders")
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
@@ -50,10 +48,7 @@ public Order updateOrderStatus(@PathVariable Integer id, @RequestBody Map<String
 
     return orderRepository.save(order);
 }
-
-    // ===============================
-    // CREATE ORDER
-    // ===============================
+ 
     @PostMapping("/orders")
     public Order createOrder(@RequestBody CreateOrderRequest request) {
 

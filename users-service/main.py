@@ -8,11 +8,11 @@ from passlib.context import CryptContext
 
 app = FastAPI()
 
-# Password hashing (stable, no bcrypt issues)
+ 
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 
-# Enable CORS
+ 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,10 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-# =========================
-# Request Models
-# =========================
+ 
 
 class RegisterRequest(BaseModel):
     email: str
@@ -36,10 +33,7 @@ class LoginRequest(BaseModel):
     email: str
     password: str
 
-
-# =========================
-# Database Connection
-# =========================
+ 
 
 async def get_db_connection():
     return await asyncpg.connect(
@@ -50,10 +44,7 @@ async def get_db_connection():
         port=os.getenv("DB_PORT", "5432"),
     )
 
-
-# =========================
-# Get All Users (Testing)
-# =========================
+ 
 
 @app.get("/users")
 async def get_users():
@@ -64,16 +55,13 @@ async def get_users():
     finally:
         await conn.close()
 
-
-# =========================
-# Register Endpoint
-# =========================
+ 
 
 @app.post("/register")
 async def register_user(user: RegisterRequest):
     conn = await get_db_connection()
     try:
-        # Check if email exists
+         
         existing_user = await conn.fetchrow(
             'SELECT * FROM "User" WHERE email = $1',
             user.email,
@@ -82,10 +70,10 @@ async def register_user(user: RegisterRequest):
         if existing_user:
             raise HTTPException(status_code=400, detail="Email already registered")
 
-        # Hash password
+         
         hashed_password = pwd_context.hash(user.password)
 
-        # Insert new user
+     
         await conn.execute(
             '''
             INSERT INTO "User"(email, password, name, role, "createdAt", "updatedAt")
@@ -102,10 +90,7 @@ async def register_user(user: RegisterRequest):
     finally:
         await conn.close()
 
-
-# =========================
-# Login Endpoint
-# =========================
+ 
 
 @app.post("/login")
 async def login_user(user: LoginRequest):
@@ -119,7 +104,7 @@ async def login_user(user: LoginRequest):
         if not db_user:
             raise HTTPException(status_code=400, detail="Invalid email or password")
 
-        # Verify password
+        
         if not pwd_context.verify(user.password, db_user["password"]):
             raise HTTPException(status_code=400, detail="Invalid email or password")
 
@@ -136,7 +121,4 @@ async def login_user(user: LoginRequest):
     finally:
         await conn.close()
 
-
-# =========================
-# Update Name Endpoint (NEW)
-# =========================
+ 

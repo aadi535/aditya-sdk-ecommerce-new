@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const products = [
   { 
     id: 1, 
-    name: "iPhone 17 Pro", 
+    name: "iPhone 18 Ultra", 
     price: 1200, 
     image: "/images/iphone.jpg", 
     desc: "Titanium design | A19 Pro Chip | 48MP Triple Camera System | 120Hz ProMotion Display | 5G & eSIM support | USB-C 4.0" 

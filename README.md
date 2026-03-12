@@ -88,7 +88,7 @@ After updating the role and logging in with that account, the Admin Panel button
 
 ### PRODUCT DETAILS
 <img width="900" height="1079" alt="Screenshot 2026-03-12 183710" src="https://github.com/user-attachments/assets/e5b9af15-3db6-4656-a7e6-8ca9615630a9" />
-<img width="900" height="912" alt="Screenshot 2026-03-12 183740" src="https://github.com/user-attachments/assets/1a281b9e-0272-4131-a8b0-94d6c445a1f8" />
+<img width="900" height="1025" alt="image" src="https://github.com/user-attachments/assets/368e74e6-7c29-4296-9e12-23e97e07d35e" />
 
 ### SHOPPING CART
 <img width="900" height="965" alt="Screenshot 2026-03-12 183917" src="https://github.com/user-attachments/assets/b4bbd86d-10d1-4f10-96cc-6acd57aafad9" />

@@ -5,20 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const USERS_API = "http://localhost:8000";
   const ORDERS_API = "http://localhost:8083";
 
-<<<<<<< HEAD
-=======
-  
-
->>>>>>> 95dfdd1 (Final project update)
+   
+ 
   let cart = [];
   let isLoginMode = true;
   let currentUser = JSON.parse(localStorage.getItem("user"));
 
-<<<<<<< HEAD
-=======
-  
-
->>>>>>> 95dfdd1 (Final project update)
+   
+ 
 const products = [
   { 
     id: 1, 
@@ -84,12 +78,9 @@ const products = [
     desc: "15.6\" 144Hz FHD | RTX 5060 GPU | Intel Core i9 | 16GB DDR5 RAM | Military-Grade Toughness | RGB Backlit Keyboard" 
   }
 ];
+ 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
   const productsContainer = document.getElementById("products");
   const cartPopup = document.getElementById("cart-popup");
   const openCartBtn = document.getElementById("open-cart");
@@ -108,14 +99,12 @@ const products = [
   const adminBtn = document.getElementById("admin-btn");
   const ordersBtn = document.getElementById("orders-btn");
 
+
   const productModal = document.getElementById("product-modal");
   const closeProduct = document.getElementById("close-product");
-
-<<<<<<< HEAD
-=======
+ 
   
-
->>>>>>> 95dfdd1 (Final project update)
+ 
   function renderProducts() {
 
     productsContainer.innerHTML = "";
@@ -131,19 +120,13 @@ const products = [
         <p class="centre">€${product.price}</p>
         <button>Add to Cart</button>
       `;
-
-<<<<<<< HEAD
-=======
-      
->>>>>>> 95dfdd1 (Final project update)
+ 
+       
       div.querySelector("button").addEventListener("click", () => {
         addToCart(product);
       });
 
-<<<<<<< HEAD
-=======
-      
->>>>>>> 95dfdd1 (Final project update)
+       
       div.querySelector("img").addEventListener("click", () => {
         openProductModal(product);
       });
@@ -154,11 +137,8 @@ const products = [
 
   }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
+ 
   function openProductModal(product){
 
     document.getElementById("product-modal-img").src = product.image;
@@ -173,12 +153,9 @@ const products = [
   closeProduct.addEventListener("click", () => {
     productModal.classList.remove("active");
   });
-
-<<<<<<< HEAD
-=======
+ 
   
-
->>>>>>> 95dfdd1 (Final project update)
+ 
   function addToCart(product) {
     cart.push(product);
     updateCart();
@@ -223,11 +200,8 @@ const products = [
     cartPopup.classList.toggle("open");
   });
 
-<<<<<<< HEAD
-=======
+  
  
-
->>>>>>> 95dfdd1 (Final project update)
   function updateAuthUI() {
 
     if (currentUser) {
@@ -254,12 +228,7 @@ const products = [
     }
 
   }
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
   authBtn.addEventListener("click", () => {
 
     if (currentUser) {
@@ -346,11 +315,8 @@ const products = [
     }
   });
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
+ 
   checkoutBtn.addEventListener("click", async () => {
 
     if (!currentUser) {
@@ -394,12 +360,9 @@ const products = [
     }
 
   });
+ 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
   async function loadUserOrders() {
 
     productsContainer.innerHTML = "<h2>My Orders</h2>";
@@ -436,11 +399,8 @@ const products = [
     loadUserOrders();
   });
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
+ 
   adminBtn.addEventListener("click", () => {
     loadAdminOrders();
   });
@@ -496,12 +456,9 @@ const products = [
     });
 
   }
+ 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
   function showToast(message) {
 
     const toast = document.getElementById("toast");
@@ -514,12 +471,9 @@ const products = [
     }, 6000);
 
   }
-<<<<<<< HEAD
-=======
- 
->>>>>>> 95dfdd1 (Final project update)
+   
 
   updateAuthUI();
   renderProducts();
 
-});
+}); 

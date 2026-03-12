@@ -4,12 +4,7 @@ body {
   background-color: #f2f1ec;
   color: #1d1d1f;
 }
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
+ 
 .topbar{
   display:flex;
   align-items:center;
@@ -23,34 +18,19 @@ body {
   top:0;
   z-index:100;
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-
+ 
 .nav-left{
   display:flex;
   gap:12px;
   align-items:center;
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-
+ 
 .nav-right{
   display:flex;
   gap:12px;
   align-items:center;
 }
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 95dfdd1 (Final project update)
-
 .brand{
   position:absolute;
   left:50%;
@@ -60,12 +40,7 @@ body {
   font-weight:700;
   margin:0;
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-
+ 
 .nav-left button,
 .nav-right button,
 #auth-btn{
@@ -85,12 +60,7 @@ body {
   transform:translateY(-2px);
   box-shadow:0 6px 12px rgba(0,0,0,0.15);
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-
+ 
 .cart-wrapper {
   position: relative;
 }
@@ -103,12 +73,7 @@ body {
   cursor: pointer;
   font-size: 14px;
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-
+ 
 .cart-popup {
   position: absolute;
   right: 0;
@@ -163,12 +128,7 @@ body {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
-main {
+ main {
   padding: 90px 80px;
 }
 
@@ -215,12 +175,7 @@ main {
   box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
-.auth-modal {
+ .auth-modal {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.4);
@@ -279,12 +234,7 @@ main {
    min-height: 18px;
  }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
-.order-card{
+ .order-card{
   background:white;
   border-radius:12px;
   padding:20px;
@@ -311,12 +261,7 @@ main {
   font-size:14px;
 }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
-.toast{
+ .toast{
   position:fixed;
   bottom:30px;
   left:50%;
@@ -332,12 +277,7 @@ main {
   box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 95dfdd1 (Final project update)
-.hidden{
+ .hidden{
   display:none;
 }
 
@@ -354,19 +294,11 @@ justify-content:center;
 z-index:2000;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-.product-modal.active{
+ .product-modal.active{
 display:flex;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-.product-modal-content{
+ .product-modal-content{
 background:white;
 padding:30px;
 border-radius:12px;
@@ -375,11 +307,7 @@ text-align:center;
 position:relative;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 95dfdd1 (Final project update)
-.product-modal.active .product-modal-content{
+ .product-modal.active .product-modal-content{
 animation:popup .35s ease;
 }
 

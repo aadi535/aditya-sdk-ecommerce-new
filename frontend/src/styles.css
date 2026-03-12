@@ -5,6 +5,11 @@ body {
   color: #1d1d1f;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95dfdd1 (Final project update)
 .topbar{
   display:flex;
   align-items:center;
@@ -19,6 +24,10 @@ body {
   z-index:100;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 
 .nav-left{
   display:flex;
@@ -26,13 +35,21 @@ body {
   align-items:center;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 
 .nav-right{
   display:flex;
   gap:12px;
   align-items:center;
 }
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 95dfdd1 (Final project update)
 
 .brand{
   position:absolute;
@@ -44,6 +61,10 @@ body {
   margin:0;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 
 .nav-left button,
 .nav-right button,
@@ -65,6 +86,10 @@ body {
   box-shadow:0 6px 12px rgba(0,0,0,0.15);
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 
 .cart-wrapper {
   position: relative;
@@ -79,6 +104,10 @@ body {
   font-size: 14px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 
 .cart-popup {
   position: absolute;
@@ -134,6 +163,11 @@ body {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95dfdd1 (Final project update)
 main {
   padding: 90px 80px;
 }
@@ -181,6 +215,11 @@ main {
   box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95dfdd1 (Final project update)
 .auth-modal {
   position: fixed;
   inset: 0;
@@ -240,6 +279,11 @@ main {
    min-height: 18px;
  }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95dfdd1 (Final project update)
 .order-card{
   background:white;
   border-radius:12px;
@@ -267,6 +311,11 @@ main {
   font-size:14px;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95dfdd1 (Final project update)
 .toast{
   position:fixed;
   bottom:30px;
@@ -283,6 +332,11 @@ main {
   box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95dfdd1 (Final project update)
 .hidden{
   display:none;
 }
@@ -300,10 +354,18 @@ justify-content:center;
 z-index:2000;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 .product-modal.active{
 display:flex;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 .product-modal-content{
 background:white;
 padding:30px;
@@ -313,6 +375,10 @@ text-align:center;
 position:relative;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95dfdd1 (Final project update)
 .product-modal.active .product-modal-content{
 animation:popup .35s ease;
 }

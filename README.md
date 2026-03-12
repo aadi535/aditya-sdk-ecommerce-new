@@ -81,7 +81,7 @@ After updating the role and logging in with that account, the Admin Panel button
 ### HOME PAGE
 <img width="900" height="952" alt="Screenshot 2026-03-12 182306" src="https://github.com/user-attachments/assets/526e27c6-65b3-41c5-823b-c37df1c22956" />
 
-### LOGIN, SIGNUP, USERVALIDATION
+### LOGIN, SIGNUP, USER VALIDATION
 <img width="450" height="430" alt="Screenshot 2026-03-12 184105" src="https://github.com/user-attachments/assets/9a41c3fe-8c5f-423e-ae12-ef379c0da329" />
 <img width="466" height="445" alt="Screenshot 2026-03-12 182333" src="https://github.com/user-attachments/assets/0ce29892-98bf-4559-8ac4-5c22a175c7c0" />
 <img width="457" height="433" alt="Screenshot 2026-03-12 182715" src="https://github.com/user-attachments/assets/9855e055-d5a2-4383-8b4b-192c5c0c29e3" />

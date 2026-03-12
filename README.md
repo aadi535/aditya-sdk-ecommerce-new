@@ -87,14 +87,13 @@ After updating the role and logging in with that account, the Admin Panel button
 <img width="457" height="433" alt="Screenshot 2026-03-12 182715" src="https://github.com/user-attachments/assets/9855e055-d5a2-4383-8b4b-192c5c0c29e3" />
 
 ### PRODUCT DETAILS
-<img width="900" height="1079" alt="Screenshot 2026-03-12 183710" src="https://github.com/user-attachments/assets/e5b9af15-3db6-4656-a7e6-8ca9615630a9" />
-<img width="900" height="1025" alt="image" src="https://github.com/user-attachments/assets/368e74e6-7c29-4296-9e12-23e97e07d35e" />
+<img width="900" height="961" alt="image" src="https://github.com/user-attachments/assets/b90086f9-c934-474b-a791-b71475681585" />
+<img width="900" height="967" alt="image" src="https://github.com/user-attachments/assets/85b40cbc-3763-4bf4-a5a8-af8876172442" />
 
 ### SHOPPING CART
-<img width="900" height="965" alt="Screenshot 2026-03-12 183917" src="https://github.com/user-attachments/assets/b4bbd86d-10d1-4f10-96cc-6acd57aafad9" />
+<img width="900" height="968" alt="image" src="https://github.com/user-attachments/assets/aca99a3a-5911-4e45-b288-44b59929b93f" />
 
 ### USER ORDERS
-<img width="900" height="965" alt="Screenshot 2026-03-12 183917" src="https://github.com/user-attachments/assets/98e30afd-493b-4091-88e2-aaa6b46bbfc5" />
 <img width="900" height="403" alt="Screenshot 2026-03-12 183941" src="https://github.com/user-attachments/assets/12509cf3-72f0-44ae-b1e5-1a35e8fa5f4e" />
 
 ### ADMIN PANEL

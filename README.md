@@ -50,6 +50,29 @@ The frontend connects separately to three backend services:
 •	Products Service → provides product catalog and details
 All three services use the same PostgreSQL database.
 
+## Project Structure
+
+aditya-sdk-ecommerce-new/
+
+frontend/ → Web application (HTML, CSS, JavaScript)
+
+users-service/ → User authentication service (Python + FastAPI)
+
+orders-service/ → Order management service (Java + Spring Boot)
+
+products-service/ → Product catalog service (PHP + Slim)
+
+database/ → Database migrations and configuration
+
+docs/ → Documentation and ADR files
+
+docker-compose.yml → Runs all services together
+
+.env → Environment variables configuration
+
+README.md → Project documentation
+
+
 ## How to Run the Project
 ## Requirements 
 •	Docker 
@@ -98,6 +121,29 @@ After updating the role and logging in with that account, the Admin Panel button
 
 ### ADMIN PANEL
 <img width="900" height="726" alt="Screenshot 2026-03-12 184451" src="https://github.com/user-attachments/assets/2c1e7bee-4211-4bf1-8ccf-481bdcb38ca9" />
+
+
+## Testing
+
+The system was tested manually to make sure all main features work correctly.
+
+User Tests  
+• Register a new account  
+• Login with correct and incorrect credentials  
+• Add products to the shopping cart  
+• Place an order  
+• View personal order history  
+
+Admin Tests  
+• Login as an administrator  
+• Open the Admin Panel  
+• View all customer orders  
+• Update the order status  
+
+System Tests  
+• Start the project using `docker compose up --build`  
+• Check communication between services  
+• Verify that the database stores and retrieves data correctly
 
 
 ## Author

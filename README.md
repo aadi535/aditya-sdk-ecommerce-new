@@ -68,7 +68,7 @@ docs/ → Documentation and ADR files
 
 docker-compose.yml → Runs all services together
 
-.env → Environment variables configuration
+.env.example → Environment variables configuration
 
 README.md → Project documentation
 

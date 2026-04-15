@@ -50,6 +50,15 @@ The frontend connects separately to three backend services:
 •	Products Service → provides product catalog and details
 All three services use the same PostgreSQL database.
 
+## System Workflow
+
+1. User interacts with the frontend (browser)
+2. Frontend sends requests to backend services via REST APIs
+3. Users Service handles authentication and user data
+4. Orders Service processes and stores orders
+5. Products Service provides product information
+6. All services store and retrieve data from PostgreSQL
+
 ## Project Structure
 
 aditya-sdk-ecommerce-new/
@@ -74,20 +83,34 @@ README.md → Project documentation
 
 
 ## How to Run the Project
-## Requirements 
-•	Docker 
-•	Docker Compose
-## Steps to start the application 
-1.	Open a terminal in the project folder 
-2.	Run the following command: docker compose up --build
 
-## After the services start, open these addresses in your browser:
-•	Main website (frontend):
-http://localhost:5173 
-•	Users' service API documentation:
-http://localhost:8000/docs 
-•	Orders service endpoint:
+Requirements
+• Docker
+• Docker Compose
+
+Setup Environment Variables
+Before running the project, create a .env file:
+
+Copy the example file:
+cp .env.example .env
+
+Steps to start the application
+Open a terminal in the project folder
+Run the following command:
+docker compose up --build
+
+## After the services start, open these services in your browser:
+
+Frontend (UI):
+http://localhost:5173
+
+Users Service (FastAPI):
+http://localhost:8000/docs
+
+Orders Service (Spring Boot):
 http://localhost:8083/orders
+
+This project was tested on a clean environment using Docker Compose
 
 ## Admin Account Setup
 The system does not have a public admin registration form.
@@ -124,8 +147,7 @@ After updating the role and logging in with that account, the Admin Panel button
 
 
 ## Testing
-
-The system was tested manually to make sure all main features work correctly.
+The system was tested using manual test scenarios to verify functionality and integration between services.
 
 User Tests  
 • Register a new account  

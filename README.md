@@ -125,7 +125,7 @@ After updating the role and logging in with that account, the Admin Panel button
 ## Screenshots : 
 
 ### HOME PAGE
-<img width="900" height="920" alt="Screenshot 2026-03-12 182306" src="https://github.com/user-attachments/assets/526e27c6-65b3-41c5-823b-c37df1c22956" />
+<img width="800" height="720" alt="Screenshot 2026-03-12 182306" src="https://github.com/user-attachments/assets/526e27c6-65b3-41c5-823b-c37df1c22956" />
 
 ### LOGIN, SIGNUP, USER VALIDATION
 <img width="450" height="430" alt="Screenshot 2026-03-12 184105" src="https://github.com/user-attachments/assets/9a41c3fe-8c5f-423e-ae12-ef379c0da329" />
@@ -133,17 +133,17 @@ After updating the role and logging in with that account, the Admin Panel button
 <img width="457" height="433" alt="Screenshot 2026-03-12 182715" src="https://github.com/user-attachments/assets/9855e055-d5a2-4383-8b4b-192c5c0c29e3" />
 
 ### PRODUCT DETAILS
-<img width="900" height="920" alt="image" src="https://github.com/user-attachments/assets/b90086f9-c934-474b-a791-b71475681585" />
-<img width="900" height="920" alt="image" src="https://github.com/user-attachments/assets/85b40cbc-3763-4bf4-a5a8-af8876172442" />
+<img width="800" height="720" alt="image" src="https://github.com/user-attachments/assets/b90086f9-c934-474b-a791-b71475681585" />
+<img width="800" height="720" alt="image" src="https://github.com/user-attachments/assets/85b40cbc-3763-4bf4-a5a8-af8876172442" />
 
 ### SHOPPING CART
-<img width="900" height="920" alt="image" src="https://github.com/user-attachments/assets/aca99a3a-5911-4e45-b288-44b59929b93f" />
+<img width="800" height="720" alt="image" src="https://github.com/user-attachments/assets/aca99a3a-5911-4e45-b288-44b59929b93f" />
 
 ### USER ORDERS
 <img width="900" height="403" alt="Screenshot 2026-03-12 183941" src="https://github.com/user-attachments/assets/12509cf3-72f0-44ae-b1e5-1a35e8fa5f4e" />
 
 ### ADMIN PANEL
-<img width="900" height="726" alt="Screenshot 2026-03-12 184451" src="https://github.com/user-attachments/assets/2c1e7bee-4211-4bf1-8ccf-481bdcb38ca9" />
+<img width="800" height="726" alt="Screenshot 2026-03-12 184451" src="https://github.com/user-attachments/assets/2c1e7bee-4211-4bf1-8ccf-481bdcb38ca9" />
 
 
 ## Testing

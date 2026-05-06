@@ -1,6 +1,6 @@
 ## APEX PREMIUM GADGETS – E-Commerce System
 
-This is a complete full-stack online store project, created as the final capstone assignment for the Software Developer Kit course.
+This is a complete full-stack online store project (SDK).
 The application lets customers browse products, register accounts, place orders, and track their order status.
 It also includes an admin panel where store administrators can view and manage all customer orders, including changing their status.
 

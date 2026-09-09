@@ -1,4 +1,4 @@
-## APEX PREMIUM GADGETS – E-Commerce System
+## APEX PREMIUM GADGETS -> E-Commerce System
 
 This is a complete full-stack online store project (SDK).
 The application lets customers browse products, register accounts, place orders, and track their order status.

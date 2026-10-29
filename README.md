@@ -1,3 +1,5 @@
+> Hosting update: the deployment-ready version uses authenticated sessions, server-calculated order totals and a database-backed catalog. See [Deployment instructions](docs/DEPLOYMENT.md). This is an educational store: accounts and demo orders are saved, but no payments or deliveries are provided.
+
 ## APEX PREMIUM GADGETS -> E-Commerce System
 
 This is a complete full-stack online store project (SDK).
@@ -6,17 +8,17 @@ It also includes an admin panel where store administrators can view and manage a
 
 ## Project Features
 
-## Customer Features 
-•	Browse the full product catalog 
-•	View detailed information about each product 
-•	Add products to the shopping cart 
-•	Register a new account and log in 
-•	Place orders (available only to logged-in users) 
+## Customer Features
+•	Browse the full product catalog
+•	View detailed information about each product
+•	Add products to the shopping cart
+•	Register a new account and log in
+•	Place orders (available only to logged-in users)
 •	View personal order history
 
-## Admin Features 
-•	View all orders placed by customers 
-•	Update the status of any order 
+## Admin Features
+•	View all orders placed by customers
+•	Update the status of any order
 •	Manage the complete order process
 
 ## Order Status Flow
@@ -25,28 +27,28 @@ or
 Pending → Confirmed → Cancelled
 
 ## Technologies Used
-## Frontend 
-•	HTML5 
-•	CSS3 
-•	Vanilla JavaScript (no frameworks) 
+## Frontend
+•	HTML5
+•	CSS3
+•	Vanilla JavaScript (no frameworks)
 •	Vite development server
-## Backend Microservices 
-•	Python + FastAPI → Users & Authentication service 
-•	Java + Spring Boot → Orders service 
+## Backend Microservices
+•	Python + FastAPI → Users & Authentication service
+•	Java + Spring Boot → Orders service
 •	PHP + Slim → Products service
-## Database 
+## Database
 •	PostgreSQL
-## Infrastructure 
-•	Docker 
+## Infrastructure
+•	Docker
 •	Docker Compose
-## Version Control 
+## Version Control
 •	Git & GitHub
 
 ##  System Architecture
 The project follows a microservices architecture.
-The frontend connects separately to three backend services: 
-•	Users Service → handles authentication and user accounts 
-•	Orders Service → manages order creation, tracking, and status updates 
+The frontend connects separately to three backend services:
+•	Users Service → handles authentication and user accounts
+•	Orders Service → manages order creation, tracking, and status updates
 •	Products Service → provides product catalog and details
 All three services use the same PostgreSQL database.
 
@@ -122,7 +124,7 @@ WHERE email = 'admin@email.com';
 
 After updating the role and logging in with that account, the Admin Panel button will become visible in the interface.
 
-## Screenshots : 
+## Screenshots :
 
 ### HOME PAGE
 <img width="800" height="720" alt="Screenshot 2026-03-12 182306" src="https://github.com/user-attachments/assets/526e27c6-65b3-41c5-823b-c37df1c22956" />
@@ -149,27 +151,27 @@ After updating the role and logging in with that account, the Admin Panel button
 ## Testing
 The system was tested using manual test scenarios to verify functionality and integration between services.
 
-User Tests  
-• Register a new account  
-• Login with correct and incorrect credentials  
-• Add products to the shopping cart  
-• Place an order  
-• View personal order history  
+User Tests
+• Register a new account
+• Login with correct and incorrect credentials
+• Add products to the shopping cart
+• Place an order
+• View personal order history
 
-Admin Tests  
-• Login as an administrator  
-• Open the Admin Panel  
-• View all customer orders  
-• Update the order status  
+Admin Tests
+• Login as an administrator
+• Open the Admin Panel
+• View all customer orders
+• Update the order status
 
-System Tests  
-• Start the project using `docker compose up --build`  
-• Check communication between services  
+System Tests
+• Start the project using `docker compose up --build`
+• Check communication between services
 • Verify that the database stores and retrieves data correctly
 
 
 ## Author
- Aditya Raj 
+ Aditya Raj
 
 
 

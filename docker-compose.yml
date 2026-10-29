@@ -54,6 +54,12 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+      - ALLOWED_ORIGINS=http://localhost:${FRONTEND_PORT}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     depends_on:
       - database
 
@@ -65,6 +71,8 @@ services:
     ports:
       - "${ORDERS_SERVICE_PORT}:8080"
     environment:
+      - USERS_API_URL=http://users-service:8000
+      - ALLOWED_ORIGINS=http://localhost:${FRONTEND_PORT}
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
@@ -72,6 +80,8 @@ services:
       - SPRING_JPA_HIBERNATE_NAMING_PHYSICAL_STRATEGY=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     depends_on:
       database:
+        condition: service_healthy
+      users-service:
         condition: service_healthy
 
   # PostgreSQL Database
@@ -93,6 +103,7 @@ services:
 
   # Database Migration Runner - Prisma
   migration-runner:
+    profiles: ["legacy-migrations"]
     build:
       context: ./database
       dockerfile: Dockerfile

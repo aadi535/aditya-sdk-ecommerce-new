@@ -345,3 +345,24 @@ font-size:20px;
 .product img{
 cursor:pointer;
 }
+.store-intro { max-width:1100px; margin:40px auto 20px; padding:0 24px; line-height:1.7; }
+.store-intro h2 { font-size:clamp(1.7rem,4vw,2.6rem); margin:8px 0; letter-spacing:-.04em; }
+.eyebrow { font-size:.7rem; letter-spacing:.14em; color:#595959; }
+.demo-notice { padding:12px 16px; background:#e7e5db; border-left:3px solid #5e6957; font-size:.85rem; }
+.store-intro a { color:#324a36; text-underline-offset:4px; }
+#account-status { font-size:.85rem; color:#575757; }
+.product-image { background:transparent!important; padding:0!important; display:block; width:100%; border:0; box-shadow:none!important; }
+.product-image img { width:100%; object-fit:contain; }
+.product-image:hover { transform:none!important; }
+.service-message { grid-column:1/-1; padding:32px; background:white; border-radius:12px; line-height:1.7; }
+.page-heading { grid-column:1/-1; }
+.auth-box { position:relative; }
+.auth-box label { display:block; font-size:.8rem; margin-top:12px; text-align:left; }
+.close-dialog { position:absolute; right:12px; top:8px; background:none!important; color:#222!important; width:auto!important; font-size:24px; border:0; cursor:pointer; }
+#toggle-auth { margin-top:16px; }
+.cart-popup { max-height:70vh; overflow:auto; }
+.product-modal-content { max-height:85vh; overflow:auto; }
+button:disabled { opacity:.5; cursor:wait; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #698451; outline-offset:3px; }
+@media(max-width:1100px) { .topbar { padding:18px 24px; flex-wrap:wrap; gap:18px; } .brand { position:static; transform:none; order:-1; width:100%; text-align:center; font-size:22px; } .nav-left,.nav-right { flex-wrap:wrap; } }
+@media(max-width:600px) { .topbar { padding:14px; } .nav-left,.nav-right { gap:8px; } .brand { font-size:18px; } .products-grid { padding:20px 14px!important; grid-template-columns:1fr!important; } .cart-popup { position:fixed; top:135px; left:12px; right:12px; width:auto; } .auth-box { width:calc(100vw - 64px); max-width:360px; box-sizing:border-box; } .store-intro { margin-top:28px; padding:0 16px; } }

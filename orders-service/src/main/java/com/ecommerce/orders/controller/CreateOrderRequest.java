@@ -1,10 +1,7 @@
 package com.ecommerce.orders.controller;
 
-import lombok.Data;
-import java.math.BigDecimal;
+import java.util.List;
 
-@Data
-public class CreateOrderRequest {
-    private Integer userId;
-    private BigDecimal totalAmount;
+public record CreateOrderRequest(List<Item> items) {
+    public record Item(Integer productId, Integer quantity) {}
 }

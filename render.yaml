@@ -1,0 +1,86 @@
+services:
+  - type: web
+    name: apex-users-aditya
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: users-service
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: apex-db-aditya
+          property: connectionString
+      - key: ALLOWED_ORIGINS
+        sync: false
+  - type: web
+    name: apex-products-aditya
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: products-service
+    healthCheckPath: /health
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: apex-db-aditya
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: apex-db-aditya
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: apex-db-aditya
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: apex-db-aditya
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: apex-db-aditya
+          property: password
+      - key: ALLOWED_ORIGINS
+        sync: false
+  - type: web
+    name: apex-orders-aditya
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: orders-service
+    healthCheckPath: /health
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: apex-db-aditya
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: apex-db-aditya
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: apex-db-aditya
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: apex-db-aditya
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: apex-db-aditya
+          property: password
+      - key: USERS_API_URL
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: JAVA_TOOL_OPTIONS
+        value: '-XX:MaxRAMPercentage=65 -XX:+UseSerialGC'
+databases:
+  - name: apex-db-aditya
+    plan: free
+    region: frankfurt
+    databaseName: apex
+    user: apex
+    ipAllowList: []

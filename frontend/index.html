@@ -16,9 +16,9 @@
  <header class="topbar">
 
   <div class="nav-left">
-     <a href="http://localhost:5173/">
+
     <button id="home-btn">Home</button>
-    </a>
+
     <button id="admin-btn" class="hidden">Admin Panel</button>
 
     <button id="auth-btn">Login</button>
@@ -36,9 +36,9 @@
 
     <div class="cart-wrapper">
 
-      <div class="cart-button" id="open-cart">
+      <button type="button" class="cart-button" id="open-cart" aria-label="Open shopping bag">
         Bag (<span id="cart-count">0</span>)
-      </div>
+      </button>
 
 
       <div class="cart-popup" id="cart-popup">
@@ -60,37 +60,39 @@
   </div>
 
 </header>
- 
-<div class="auth-modal" id="auth-modal">
 
-  <div class="auth-box">
+<div class="auth-modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+
+  <form class="auth-box" id="auth-form">
+    <button id="close-auth" type="button" class="close-dialog" aria-label="Close login">×</button>
 
     <p id="auth-error" class="auth-error"></p>
 
     <h2 id="auth-title">Login</h2>
 
-    <input type="email" id="email" placeholder="Email">
+    <label for="email">Email</label><input type="email" id="email" placeholder="Email" required autocomplete="email">
 
-    <input type="password" id="password" placeholder="Password">
+    <label for="password">Password (at least 8 characters to register)</label><input type="password" id="password" placeholder="Password" required maxlength="128" autocomplete="current-password">
 
-    <button id="submit-auth">Submit</button>
+    <button id="submit-auth" type="submit">Submit</button>
 
-    <p id="toggle-auth">Don't have an account? Sign up</p>
+    <button type="button" id="toggle-auth">Create an account</button>
 
-  </div>
+  </form>
 
  </div>
+<section class="store-intro"><p class="eyebrow">A MICROSERVICES PROJECT BY ADITYA RAJ</p><h2>Everyday tech. One simple store.</h2><p>Browse the sample catalog, build a bag and save an order.</p><p class="demo-notice">Educational storefront · Real accounts and saved demo orders · No payments, purchases or deliveries.</p><p id="account-status" role="status"></p><a href="https://github.com/aadi535/aditya-sdk-ecommerce-new" target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a></section>
 <main>
 
   <div id="products" class="products-grid"></div>
 
 </main>
- 
-<div id="product-modal" class="product-modal hidden">
+
+<div id="product-modal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
 
   <div class="product-modal-content">
 
-    <span id="close-product" class="close-product">✕</span>
+    <button id="close-product" class="close-product" aria-label="Close product details">Close</button>
 
     <img id="product-modal-img" alt="Product Image">
 
@@ -105,8 +107,8 @@
   </div>
 
 </div>
- 
-<div id="toast" class="toast hidden"></div>
+
+<div id="toast" class="toast hidden" role="status"></div>
  <script type="module" src="/src/main.js"></script>
 </body>
 </html>

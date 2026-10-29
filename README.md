@@ -1,3 +1,5 @@
+**Deployed storefront:** https://apex-ecommerce-aditya.vercel.app
+
 > Hosting update: the deployment-ready version uses authenticated sessions, server-calculated order totals and a database-backed catalog. See [Deployment instructions](docs/DEPLOYMENT.md). This is an educational store: accounts and demo orders are saved, but no payments or deliveries are provided.
 
 ## APEX PREMIUM GADGETS -> E-Commerce System

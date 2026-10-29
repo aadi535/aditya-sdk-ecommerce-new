@@ -1,5 +1,15 @@
 # Hosting APEX
 
+Deployed storefront: https://apex-ecommerce-aditya.vercel.app
+
+Public API origins:
+
+- Users: https://apex-users-aditya.onrender.com
+- Products: https://apex-products-aditya.onrender.com
+- Orders: https://apex-orders-aditya.onrender.com
+
+These services use Render's free tier. The current database was created on 29 October 2026 and expires after 30 days. Arrange migration or a paid database before expiry for continued account and order persistence.
+
 The frontend runs on Vercel. Three Docker web services (Python users/auth, PHP products, Java orders) and PostgreSQL run on Render. This preserves the project’s microservices architecture. Vercel does not run the Docker Compose stack.
 
 ## Render

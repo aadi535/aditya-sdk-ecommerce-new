@@ -45,6 +45,21 @@ assert any(item['id'] == order['id'] for item in call('GET', orders, '/orders', 
 assert not any(item['id'] == order['id'] for item in call('GET', orders, '/orders', 200, second['token']))
 call('GET', orders, f"/orders/user/{first['user']['id']}", 403, second['token'])
 call('PUT', orders, f"/orders/{order['id']}/status", 403, first['token'], json={'statusId':2})
+if os.getenv('TEST_DATABASE_URL'):
+    import asyncio
+    import asyncpg
+    async def promote_test_account():
+        conn = await asyncpg.connect(os.environ['TEST_DATABASE_URL'])
+        try:
+            await conn.execute('UPDATE "User" SET role=$1 WHERE id=$2', 'admin', second['user']['id'])
+        finally:
+            await conn.close()
+    asyncio.run(promote_test_account())
+    call('PUT', orders, f"/orders/{order['id']}/status", 400, second['token'], json={'statusId':5})
+    call('PUT', orders, f"/orders/{order['id']}/status", 200, second['token'], json={'statusId':2})
+    call('PUT', orders, f"/orders/{order['id']}/status", 200, second['token'], json={'statusId':5})
+    call('PUT', orders, f"/orders/{order['id']}/status", 400, second['token'], json={'statusId':2})
+    print('PASS: admin role enforcement and valid/invalid order status transitions')
 call('POST', users, '/logout', 200, first['token'])
 call('GET', users, '/me', 401, first['token'])
 call('GET', orders, '/orders', 401, first['token'])

@@ -1,0 +1,12 @@
+work/
+.venv/
+.git/
+users-service/
+orders-service/
+products-service/
+database/
+docs/
+plans/
+tests/
+frontend/node_modules/
+frontend/dist/

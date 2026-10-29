@@ -49,6 +49,8 @@ To grant an admin role, use a database console under your control:
 UPDATE "User" SET role = 'admin' WHERE email = 'your-admin-email';
 ```
 
+Alternatively, set `BOOTSTRAP_ADMIN_EMAIL` as a private environment variable on the users service and redeploy. Startup promotes only that existing account and logs a row count without its email. Remove the variable after confirming promotion. Never put the value in source or a `VITE_` variable.
+
 Register the intended admin account first. Role changes take effect when the backend verifies the next request; log in again to refresh the frontend’s admin button. Do not publish an admin password.
 
 ## Local development

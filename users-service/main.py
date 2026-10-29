@@ -27,6 +27,13 @@ async def lifespan(app):
         async with conn.transaction():
             await conn.execute("SELECT pg_advisory_xact_lock(5352026)")
             await conn.execute(Path(__file__).with_name('schema.sql').read_text())
+            # Private hosting configuration only; never embed an account in source.
+            admin_email = os.getenv('BOOTSTRAP_ADMIN_EMAIL', '').strip().lower()
+            if admin_email:
+                result = await conn.execute(
+                    'UPDATE "User" SET role=$1, "updatedAt"=NOW() WHERE email=$2',
+                    'admin', admin_email)
+                print('Admin account configuration: ' + result, flush=True)
     finally:
         await conn.close()
     yield

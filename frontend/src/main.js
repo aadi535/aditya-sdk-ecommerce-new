@@ -15,7 +15,7 @@ function toast(message) {
 }
 async function api(base, path, options = {}) {
   const response = await fetch(base + path, {...options, signal: AbortSignal.timeout(120000), headers: {
-    'Content-Type':'application/json', ...(token ? {Authorization:`Bearer ${token}`} : {}), ...options.headers
+    ...(options.body ? {'Content-Type':'application/json'} : {}), ...(token && base !== PRODUCTS_API ? {Authorization:`Bearer ${token}`} : {}), ...options.headers
   }});
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {

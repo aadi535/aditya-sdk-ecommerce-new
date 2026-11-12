@@ -6,18 +6,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>APEX Premium Gadgets</title>
+<title>Apex | The Tech Edit</title>
+<meta name="description" content="Explore Apex, a demo storefront for laptops, phones, audio and more. Browse the catalog and try a sample order without payment.">
 
-<link rel="stylesheet" href="/src/styles.css">
+
 
 </head>
 
-<body>
+<body id="top">
  <header class="topbar">
 
   <div class="nav-left">
 
-    <button id="home-btn">Home</button>
+    <button id="home-btn">Shop</button>
 
     <button id="admin-btn" class="hidden">Admin Panel</button>
 
@@ -26,7 +27,7 @@
   </div>
 
 
-  <h1 class="brand">APEX PREMIUM GADGETS</h1>
+  <a class="brand" href="#top" aria-label="Apex storefront">APEX<span>.</span></a>
 
 
   <div class="nav-right">
@@ -47,7 +48,7 @@
 
         <div class="cart-footer">
 
-          <div>Total: Euro <span id="cart-total">0</span></div>
+          <div>Subtotal <strong>€<span id="cart-total">0</span></strong></div>
 
           <button class="checkout-btn">Place Order</button>
 
@@ -81,12 +82,33 @@
   </form>
 
  </div>
-<section class="store-intro"><p class="eyebrow">A MICROSERVICES PROJECT BY ADITYA RAJ</p><h2>Everyday tech. One simple store.</h2><p>Browse the sample catalog, build a bag and save an order.</p><p class="demo-notice">Educational storefront · Real accounts and saved demo orders · No payments, purchases or deliveries.</p><p id="account-status" role="status"></p><a href="https://github.com/aadi535/aditya-sdk-ecommerce-new" target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a></section>
 <main>
+  <section class="store-intro" aria-labelledby="store-title">
+    <div class="hero-copy">
+      <p class="eyebrow">THE TECH EDIT</p>
+      <h1 id="store-title">Good tech.<br>Every day.</h1>
+      <p>Explore laptops, phones, audio and more in the Apex demo store.</p>
+      <a class="hero-link" href="#catalog">Explore the catalog <span aria-hidden="true">↘</span></a>
+    </div>
+    <img class="hero-image" src="/images/macbook.jpg" alt="" width="2048" height="1152" fetchpriority="high">
+  </section>
 
-  <div id="products" class="products-grid"></div>
-
+  <section id="catalog" class="catalog-section" aria-label="Catalog and orders">
+    <div id="catalog-tools" class="catalog-toolbar">
+      <div><p class="eyebrow">APEX COLLECTION</p><h2>Shop the catalog</h2><p id="catalog-count" role="status"></p></div>
+      <div class="catalog-controls">
+        <label>Search products<input id="product-search" type="search" placeholder="Search by name"></label>
+        <label>Sort by<select id="product-sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></label>
+      </div>
+    </div>
+    <div id="products" class="products-grid"></div>
+  </section>
 </main>
+
+<footer class="store-footer">
+  <div><strong>Apex</strong><p>Demo store by Aditya Raj. Orders are saved for testing; no payment or delivery.</p><p id="account-status" role="status"></p></div>
+  <a href="https://github.com/aadi535/aditya-sdk-ecommerce-new" target="_blank" rel="noopener noreferrer">View source ↗</a>
+</footer>
 
 <div id="product-modal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
 

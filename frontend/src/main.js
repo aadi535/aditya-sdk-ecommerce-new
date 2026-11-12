@@ -9,6 +9,8 @@ let products = [], cart = [], currentUser = null, token = sessionStorage.getItem
 const money = value => new Intl.NumberFormat('en-IE', {style:'currency', currency:'EUR'}).format(Number(value));
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
 let toastTimer;
+let view = 'catalog';
+let catalogStatus = 'loading';
 function toast(message) {
   $('toast').textContent = message; $('toast').classList.remove('hidden');
   clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.add('hidden'), 6000);
@@ -53,12 +55,21 @@ function showProduct(product) {
   $('close-product').focus();
 }
 function renderProducts() {
+  if (view !== 'catalog' || catalogStatus !== 'ready') return;
+  const query = $('product-search').value.trim().toLowerCase();
+  const sort = $('product-sort').value;
+  const visible = products.filter(product => product.name.toLowerCase().includes(query));
+  if (sort !== 'featured') {
+    visible.sort((a, b) => sort === 'low' ? a.price - b.price : b.price - a.price);
+  }
 
-  const container = $('products'); container.innerHTML = '';
-  if (!products.length) container.innerHTML = '<p>No products available.</p>';
-  products.forEach(product => {
+  const container = $('products');
+  container.replaceChildren();
+  $('catalog-count').textContent = `${visible.length} ${visible.length === 1 ? 'product' : 'products'}`;
+  if (!visible.length) container.innerHTML = '<p class="service-message">No products match your search.</p>';
+  visible.forEach(product => {
     const card = document.createElement('article'); card.className = 'product';
-    card.innerHTML = `<button class="product-image" aria-label="View ${escape(product.name)}"><img src="${escape(product.imageUrl || '/images/iphone.jpg')}" alt="${escape(product.name)}" loading="lazy"></button><h3 class="centre">${escape(product.name)}</h3><p class="centre">${money(product.price)}</p><button class="add-product" ${product.stock <= 0 ? 'disabled' : ''}>${product.stock > 0 ? 'Add to bag' : 'Out of stock'}</button>`;
+    card.innerHTML = `<button class="product-image" aria-label="View ${escape(product.name)}"><img src="${escape(product.imageUrl || '/images/iphone.jpg')}" alt="${escape(product.name)}" loading="lazy"></button><h3>${escape(product.name)}</h3><p class="product-price">${money(product.price)}</p><button class="add-product" ${product.stock <= 0 ? 'disabled' : ''}>${product.stock > 0 ? 'Add to bag' : 'Out of stock'}</button>`;
     card.querySelector('.product-image').onclick = () => showProduct(product);
     card.querySelector('.add-product').onclick = () => {
       if (cart.filter(item => item.id === product.id).length >= Math.min(product.stock, 20)) { toast('Maximum available quantity reached.'); return; }
@@ -68,16 +79,38 @@ function renderProducts() {
   });
 }
 async function loadProducts() {
-  $('products').innerHTML = '<p class="service-message" role="status">Loading the catalog… Free hosted services may take a minute to wake up.</p>';
-  try { products = await api(PRODUCTS_API, '/products'); renderProducts(); }
-  catch (error) { $('products').innerHTML = `<div class="service-message"><p>${escape(error.message)}</p><button id="retry-catalog">Try again</button></div>`; $('retry-catalog').onclick = loadProducts; }
+  catalogStatus = 'loading';
+  if (view === 'catalog') $('products').innerHTML = '<p class="service-message" role="status">Loading the catalog…</p>';
+  try {
+    products = await api(PRODUCTS_API, '/products');
+    if (!Array.isArray(products)) throw new Error('The catalog is unavailable.');
+    catalogStatus = 'ready';
+    renderProducts();
+  } catch (error) {
+    catalogStatus = 'error';
+    if (view !== 'catalog') return;
+    $('products').innerHTML = `<div class="service-message"><p>${escape(error.message)}</p><button id="retry-catalog">Try again</button></div>`;
+    $('retry-catalog').onclick = loadProducts;
+  }
+}
+function showCatalog() {
+  view = 'catalog';
+  $('catalog-tools').classList.remove('hidden');
+  if (catalogStatus === 'ready') renderProducts();
+  else if (catalogStatus === 'error') loadProducts();
+  else $('products').innerHTML = '<p class="service-message" role="status">Loading the catalog…</p>';
 }
 async function loadOrders(admin = false) {
   if (!currentUser) return;
+  const ordersView = admin ? 'admin' : 'orders';
+  view = ordersView;
+  $('catalog-tools').classList.add('hidden');
+  $('catalog').scrollIntoView({block:'start'});
 
   const container = $('products'); container.innerHTML = '<p class="service-message" role="status">Loading saved orders… Services may take a minute to wake up.</p>';
   try {
     const orders = await api(ORDERS_API, admin ? '/orders' : `/orders/user/${currentUser.id}`);
+    if (view !== ordersView) return;
     container.innerHTML = `<h2 class="page-heading">${admin ? 'Admin · Customer orders' : 'My saved orders'}</h2>`;
     if (!orders.length) container.insertAdjacentHTML('beforeend', '<p>No orders yet. Browse the catalog to get started.</p>');
     orders.forEach(order => {
@@ -100,9 +133,12 @@ async function loadOrders(admin = false) {
       }
       container.append(row);
     });
-  } catch (error) { container.innerHTML = `<div class="service-message"><p>${escape(error.message)}</p><button id="retry-orders">Try again</button></div>`; $('retry-orders').onclick = () => loadOrders(admin); }
+  } catch (error) { if (view !== ordersView) return; container.innerHTML = `<div class="service-message"><p>${escape(error.message)}</p><button id="retry-orders">Try again</button></div>`; $('retry-orders').onclick = () => loadOrders(admin); }
 }
-$('home-btn').onclick = renderProducts;
+$('home-btn').onclick = showCatalog;
+document.querySelector('.hero-link').addEventListener('click', showCatalog);
+$('product-search').addEventListener('input', renderProducts);
+$('product-sort').addEventListener('change', renderProducts);
 $('open-cart').onclick = () => $('cart-popup').classList.toggle('open');
 $('close-product').onclick = () => $('product-modal').classList.remove('active');
 $('product-modal').onclick = e => { if (e.target === $('product-modal')) $('product-modal').classList.remove('active'); };
@@ -113,7 +149,7 @@ $('auth-btn').onclick = async () => {
   if (!currentUser) { $('auth-error').textContent = ''; $('auth-modal').classList.add('active'); $('email').focus(); return; }
   try { await api(USERS_API, '/logout', {method:'POST'}); }
   catch (error) { toast(error.message); return; }
-  token = null; currentUser = null; sessionStorage.removeItem('apex-token'); updateAuth(); renderProducts();
+  token = null; currentUser = null; sessionStorage.removeItem('apex-token'); updateAuth(); showCatalog();
 };
 $('toggle-auth').onclick = () => {
   isLoginMode = !isLoginMode;

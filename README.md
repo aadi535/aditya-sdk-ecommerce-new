@@ -1,181 +1,58 @@
-**Deployed storefront:** https://apex-ecommerce-aditya.vercel.app
+# Apex E-Commerce
 
-> Hosting update: the deployment-ready version uses authenticated sessions, server-calculated order totals and a database-backed catalog. See [Deployment instructions](docs/DEPLOYMENT.md). This is an educational store: accounts and demo orders are saved, but no payments or deliveries are provided.
+A demo storefront with three backend services. Customers can browse products, sign in, and place demo orders. Administrators can view orders and update their status.
 
-## APEX PREMIUM GADGETS -> E-Commerce System
+[Open the storefront](https://apex-ecommerce-aditya.vercel.app/) · [Architecture details](ARCHITECTURE.md) · [Deployment and testing](docs/DEPLOYMENT.md)
 
-This is a complete full-stack online store project (SDK).
-The application lets customers browse products, register accounts, place orders, and track their order status.
-It also includes an admin panel where store administrators can view and manage all customer orders, including changing their status.
+I developed the **Java and Spring Boot order service**, which verifies sessions through the users API and stores orders in PostgreSQL. The demo stores accounts and orders and does not collect payments or arrange deliveries.
 
-## Project Features
+## Architecture
 
-## Customer Features
-•	Browse the full product catalog
-•	View detailed information about each product
-•	Add products to the shopping cart
-•	Register a new account and log in
-•	Place orders (available only to logged-in users)
-•	View personal order history
+```mermaid
+flowchart LR
+    UI["Vite storefront"]
+    Users["Python / FastAPI · accounts and sessions"]
+    Products["PHP / Slim · product catalog"]
+    Orders["Java / Spring Boot · checkout and orders"]
+    DB[("Shared PostgreSQL database")]
+    UI --> Users
+    UI --> Products
+    UI --> Orders
+    Orders -->|"Verify session and role"| Users
+    Users --> DB
+    Products --> DB
+    Orders --> DB
+```
 
-## Admin Features
-•	View all orders placed by customers
-•	Update the status of any order
-•	Manage the complete order process
+1. The users service issues a session after sign-in. The storefront sends it with checkout and order requests.
+2. The order service verifies the session and reads product prices from the database. It locks the relevant stock rows, calculates the total, and saves the order and stock changes in one transaction.
+3. Customers can read their own orders. The order service checks the administrator role before allowing access to admin actions.
 
-## Order Status Flow
-Pending → Confirmed → Delivered
-or
-Pending → Confirmed → Cancelled
+Docker Compose runs the local stack. The hosted layout uses Vercel for the storefront and Render for the three APIs and PostgreSQL. The [deployment guide](docs/DEPLOYMENT.md) covers configuration and first startup.
 
-## Technologies Used
-## Frontend
-•	HTML5
-•	CSS3
-•	Vanilla JavaScript (no frameworks)
-•	Vite development server
-## Backend Microservices
-•	Python + FastAPI → Users & Authentication service
-•	Java + Spring Boot → Orders service
-•	PHP + Slim → Products service
-## Database
-•	PostgreSQL
-## Infrastructure
-•	Docker
-•	Docker Compose
-## Version Control
-•	Git & GitHub
+## Run locally
 
-##  System Architecture
-The project follows a microservices architecture.
-The frontend connects separately to three backend services:
-•	Users Service → handles authentication and user accounts
-•	Orders Service → manages order creation, tracking, and status updates
-•	Products Service → provides product catalog and details
-All three services use the same PostgreSQL database.
+Install Docker with Compose. Copy [`.env.example`](.env.example) to `.env`, then run from the repository root:
 
-## System Workflow
-
-1. User interacts with the frontend (browser)
-2. Frontend sends requests to backend services via REST APIs
-3. Users Service handles authentication and user data
-4. Orders Service processes and stores orders
-5. Products Service provides product information
-6. All services store and retrieve data from PostgreSQL
-
-## Project Structure
-
-aditya-sdk-ecommerce-new/
-
-frontend/ → Web application (HTML, CSS, JavaScript)
-
-users-service/ → User authentication service (Python + FastAPI)
-
-orders-service/ → Order management service (Java + Spring Boot)
-
-products-service/ → Product catalog service (PHP + Slim)
-
-database/ → Database migrations and configuration
-
-docs/ → Documentation and ADR files
-
-docker-compose.yml → Runs all services together
-
-.env.example → Environment variables configuration
-
-README.md → Project documentation
-
-
-## How to Run the Project
-
-Requirements
-• Docker
-• Docker Compose
-
-Setup Environment Variables
-Before running the project, create a .env file:
-
-Copy the example file:
-cp .env.example .env
-
-Steps to start the application
-Open a terminal in the project folder
-Run the following command:
+```sh
 docker compose up --build
+```
 
-## After the services start, open these services in your browser:
+Open the storefront at http://localhost:5173. The local users API docs are at http://localhost:8000/docs. See the [deployment guide](docs/DEPLOYMENT.md#accounts-and-orders) for setting up a local admin account.
 
-Frontend (UI):
-http://localhost:5173
+## Verification
 
-Users Service (FastAPI):
-http://localhost:8000/docs
+The [HTTP integration test](tests/integration.py) covers login, catalog access, order creation, server-calculated pricing, customer isolation, and admin authorization. Run it against an isolated stack because it creates test accounts and a demo order. See the [test commands](docs/DEPLOYMENT.md#verification).
 
-Orders Service (Spring Boot):
-http://localhost:8083/orders
+## Screenshots
 
-This project was tested on a clean environment using Docker Compose
+<details>
+<summary>Storefront, cart, and order management</summary>
 
-## Admin Account Setup
-The system does not have a public admin registration form.
-Admin rights must be assigned manually in the database.
-Example SQL command:
-UPDATE "User"
-SET role = 'admin'
-WHERE email = 'admin@email.com';
+<img width="650" alt="Apex storefront" src="https://github.com/user-attachments/assets/526e27c6-65b3-41c5-823b-c37df1c22956">
 
-After updating the role and logging in with that account, the Admin Panel button will become visible in the interface.
+<img width="650" alt="Apex shopping cart" src="https://github.com/user-attachments/assets/aca99a3a-5911-4e45-b288-44b59929b93f">
 
-## Screenshots :
+<img width="650" alt="Apex order administration" src="https://github.com/user-attachments/assets/2c1e7bee-4211-4bf1-8ccf-481bdcb38ca9">
 
-### HOME PAGE
-<img width="800" height="720" alt="Screenshot 2026-03-12 182306" src="https://github.com/user-attachments/assets/526e27c6-65b3-41c5-823b-c37df1c22956" />
-
-### LOGIN, SIGNUP, USER VALIDATION
-<img width="450" height="430" alt="Screenshot 2026-03-12 184105" src="https://github.com/user-attachments/assets/9a41c3fe-8c5f-423e-ae12-ef379c0da329" />
-<img width="466" height="445" alt="Screenshot 2026-03-12 182333" src="https://github.com/user-attachments/assets/0ce29892-98bf-4559-8ac4-5c22a175c7c0" />
-<img width="457" height="433" alt="Screenshot 2026-03-12 182715" src="https://github.com/user-attachments/assets/9855e055-d5a2-4383-8b4b-192c5c0c29e3" />
-
-### PRODUCT DETAILS
-<img width="800" height="720" alt="image" src="https://github.com/user-attachments/assets/b90086f9-c934-474b-a791-b71475681585" />
-<img width="800" height="720" alt="image" src="https://github.com/user-attachments/assets/85b40cbc-3763-4bf4-a5a8-af8876172442" />
-
-### SHOPPING CART
-<img width="800" height="720" alt="image" src="https://github.com/user-attachments/assets/aca99a3a-5911-4e45-b288-44b59929b93f" />
-
-### USER ORDERS
-<img width="900" height="403" alt="Screenshot 2026-03-12 183941" src="https://github.com/user-attachments/assets/12509cf3-72f0-44ae-b1e5-1a35e8fa5f4e" />
-
-### ADMIN PANEL
-<img width="800" height="726" alt="Screenshot 2026-03-12 184451" src="https://github.com/user-attachments/assets/2c1e7bee-4211-4bf1-8ccf-481bdcb38ca9" />
-
-
-## Testing
-The system was tested using manual test scenarios to verify functionality and integration between services.
-
-User Tests
-• Register a new account
-• Login with correct and incorrect credentials
-• Add products to the shopping cart
-• Place an order
-• View personal order history
-
-Admin Tests
-• Login as an administrator
-• Open the Admin Panel
-• View all customer orders
-• Update the order status
-
-System Tests
-• Start the project using `docker compose up --build`
-• Check communication between services
-• Verify that the database stores and retrieves data correctly
-
-
-## Author
- Aditya Raj
-
-
-
-
-
+</details>
